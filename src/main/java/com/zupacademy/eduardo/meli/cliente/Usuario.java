@@ -1,5 +1,7 @@
 package com.zupacademy.eduardo.meli.cliente;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,11 +22,10 @@ public class Usuario {
     private String login;
 
     @NotBlank
-    @Size(min = 6)
     private String senha;
 
-    public Usuario(String login, String senha) {
+    public Usuario(@NotBlank @Email String login, SenhaManager senhaManager) {
         this.login = login;
-        this.senha = senha;
+        this.senha = senhaManager.enconde();
     }
 }

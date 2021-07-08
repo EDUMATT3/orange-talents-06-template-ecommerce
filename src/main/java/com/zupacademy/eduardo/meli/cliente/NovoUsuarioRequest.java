@@ -22,11 +22,6 @@ public class NovoUsuarioRequest {
     }
 
     public Usuario toModel() {
-        String senhaEncriptada = encriptarSenha();
-        return new Usuario(login, senhaEncriptada);
-    }
-
-    private String encriptarSenha() {
-        return new BCryptPasswordEncoder().encode(this.senha);
+        return new Usuario(login, new SenhaManager(this.senha));
     }
 }
