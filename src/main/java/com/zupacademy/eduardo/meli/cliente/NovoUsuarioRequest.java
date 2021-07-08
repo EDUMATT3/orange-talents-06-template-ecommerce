@@ -1,5 +1,6 @@
 package com.zupacademy.eduardo.meli.cliente;
 
+import com.zupacademy.eduardo.meli.compartilhado.UniqueValue;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.Email;
@@ -10,6 +11,7 @@ public class NovoUsuarioRequest {
 
     @Email
     @NotBlank
+    @UniqueValue(domainClass = Usuario.class, fieldName = "login")
     private String login;
 
     @NotBlank
