@@ -1,6 +1,11 @@
 package com.zupacademy.eduardo.meli.cliente;
 
+import com.zupacademy.eduardo.meli.categoria.security.TokenService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -10,10 +15,16 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("usuarios")
-public class NovoUsuarioController {
+public class UsuarioController {
 
     @PersistenceContext
     EntityManager em;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    TokenService tokenService;
 
     @PostMapping
     @Transactional
