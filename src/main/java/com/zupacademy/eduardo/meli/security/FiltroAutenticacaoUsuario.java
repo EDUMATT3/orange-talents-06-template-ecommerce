@@ -1,4 +1,4 @@
-package com.zupacademy.eduardo.meli.categoria.security;
+package com.zupacademy.eduardo.meli.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zupacademy.eduardo.meli.cliente.AutenticacaoRequest;
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class FiltroAutenticacaoUsuario extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
-    private final TokenService tokenService;
+    private TokenService tokenService;
 
     public FiltroAutenticacaoUsuario(AuthenticationManager authenticationManager, TokenService tokenService) {
         this.authenticationManager = authenticationManager;

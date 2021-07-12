@@ -22,7 +22,6 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Usuario usuario = em.createQuery(query, Usuario.class).setParameter("username", s).getSingleResult();
-
         return verifyUser(usuario);
     }
 

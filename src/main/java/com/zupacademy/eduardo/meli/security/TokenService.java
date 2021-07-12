@@ -1,17 +1,14 @@
-package com.zupacademy.eduardo.meli.categoria.security;
-
-
-import java.util.Date;
+package com.zupacademy.eduardo.meli.security;
 
 import com.zupacademy.eduardo.meli.cliente.Usuario;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Service;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class TokenService {
@@ -49,5 +46,4 @@ public class TokenService {
         Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
         return Long.parseLong(claims.getSubject());
     }
-
 }

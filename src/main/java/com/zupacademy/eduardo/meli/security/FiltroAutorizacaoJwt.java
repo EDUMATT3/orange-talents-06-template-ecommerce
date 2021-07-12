@@ -1,4 +1,4 @@
-package com.zupacademy.eduardo.meli.categoria.security;
+package com.zupacademy.eduardo.meli.security;
 
 import com.zupacademy.eduardo.meli.cliente.UserService;
 import com.zupacademy.eduardo.meli.cliente.Usuario;
@@ -7,7 +7,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.persistence.EntityManager;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
