@@ -1,4 +1,4 @@
-package com.zupacademy.eduardo.meli.cliente;
+package com.zupacademy.eduardo.meli.usuario;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

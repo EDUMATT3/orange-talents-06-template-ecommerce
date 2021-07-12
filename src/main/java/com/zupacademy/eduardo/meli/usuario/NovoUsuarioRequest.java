@@ -1,7 +1,6 @@
-package com.zupacademy.eduardo.meli.cliente;
+package com.zupacademy.eduardo.meli.usuario;
 
 import com.zupacademy.eduardo.meli.compartilhado.UniqueValue;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

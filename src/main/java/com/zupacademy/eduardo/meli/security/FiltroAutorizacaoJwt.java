@@ -1,7 +1,7 @@
 package com.zupacademy.eduardo.meli.security;
 
-import com.zupacademy.eduardo.meli.cliente.UserService;
-import com.zupacademy.eduardo.meli.cliente.Usuario;
+import com.zupacademy.eduardo.meli.usuario.UserService;
+import com.zupacademy.eduardo.meli.usuario.Usuario;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

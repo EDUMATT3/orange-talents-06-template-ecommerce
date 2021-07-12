@@ -1,6 +1,6 @@
 package com.zupacademy.eduardo.meli.security;
 
-import com.zupacademy.eduardo.meli.cliente.Usuario;
+import com.zupacademy.eduardo.meli.usuario.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

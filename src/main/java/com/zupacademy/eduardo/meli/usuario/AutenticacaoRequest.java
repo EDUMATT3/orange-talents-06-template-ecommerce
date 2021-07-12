@@ -1,4 +1,4 @@
-package com.zupacademy.eduardo.meli.cliente;
+package com.zupacademy.eduardo.meli.usuario;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 

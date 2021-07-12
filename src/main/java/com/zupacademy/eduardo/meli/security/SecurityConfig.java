@@ -1,6 +1,6 @@
 package com.zupacademy.eduardo.meli.security;
 
-import com.zupacademy.eduardo.meli.cliente.UserService;
+import com.zupacademy.eduardo.meli.usuario.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

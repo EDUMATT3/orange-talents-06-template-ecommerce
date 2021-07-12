@@ -1,7 +1,7 @@
 package com.zupacademy.eduardo.meli.produto;
 
 import com.zupacademy.eduardo.meli.categoria.Categoria;
-import com.zupacademy.eduardo.meli.cliente.Usuario;
+import com.zupacademy.eduardo.meli.usuario.Usuario;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.util.Assert;
 
@@ -13,6 +13,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,12 @@ public class Produto {
     @ManyToOne
     private Usuario usuario;
 
+    @Deprecated
+    public Produto() {}
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<ImagemProduto> imagens = new HashSet<>();
+
     public Produto(@NotBlank String nome, @NotNull @Positive BigDecimal valor,
                    @NotNull @Positive int quantidade, @Size(min = 3) Set<NovaCaracteristicaRequest> caracteristicas,
                    @NotBlank @Length(max = 1000) String descricao, @NotNull Categoria categoria, Usuario usuario) {
@@ -55,5 +62,18 @@ public class Produto {
         this.usuario = usuario;
         this.caracteristicas.addAll(caracteristicas.stream().map(carac -> carac.toModel(this)).collect(Collectors.toSet()));
         Assert.isTrue(this.caracteristicas.size() >= 3, "Todo produto precisa ter no mínimo 3 ou mais características");
+    }
+
+    public boolean pertenceAoUsuario(Usuario usuario) {
+        Assert.state(Objects.nonNull(usuario), "Usuario não deveria ser nulo");
+        return Objects.equals(this.usuario, usuario);
+    }
+
+    public void adicionarImagens(Set<String> imagens) {
+        Set<ImagemProduto> links = imagens.stream()
+                .map(img -> new ImagemProduto(img, this))
+                .collect(Collectors.toSet());
+
+        this.imagens.addAll(links);
     }
 }

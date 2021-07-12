@@ -1,7 +1,7 @@
 package com.zupacademy.eduardo.meli.produto;
 
 import com.zupacademy.eduardo.meli.categoria.Categoria;
-import com.zupacademy.eduardo.meli.cliente.Usuario;
+import com.zupacademy.eduardo.meli.usuario.Usuario;
 import com.zupacademy.eduardo.meli.compartilhado.ExistsValue;
 import com.zupacademy.eduardo.meli.compartilhado.UniqueValue;
 import org.hibernate.validator.constraints.Length;
@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 

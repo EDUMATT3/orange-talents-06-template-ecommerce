@@ -1,7 +1,7 @@
 package com.zupacademy.eduardo.meli.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zupacademy.eduardo.meli.cliente.AutenticacaoRequest;
+import com.zupacademy.eduardo.meli.usuario.AutenticacaoRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
