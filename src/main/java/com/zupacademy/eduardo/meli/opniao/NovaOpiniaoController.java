@@ -3,6 +3,8 @@ package com.zupacademy.eduardo.meli.opniao;
 import com.zupacademy.eduardo.meli.produto.Produto;
 import com.zupacademy.eduardo.meli.usuario.Usuario;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -19,7 +21,8 @@ public class NovaOpiniaoController {
 
     @PostMapping("produtos/{id}/opinioes")
     @Transactional
-    public ResponseEntity<?> novaOpniao(@PathVariable Long id, @RequestBody @Valid NovaOpiniaoRequest request){
+    public ResponseEntity<?> novaOpniao(@PathVariable Long id, @RequestBody @Valid NovaOpiniaoRequest request, @AuthenticationPrincipal Authentication authentication){
+
 
         Optional<Produto> possivelProduto = Optional.ofNullable(em.find(Produto.class, id));
 

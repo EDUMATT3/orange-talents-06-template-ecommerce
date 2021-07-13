@@ -1,6 +1,7 @@
 package com.zupacademy.eduardo.meli.produto;
 
 import com.zupacademy.eduardo.meli.categoria.Categoria;
+import com.zupacademy.eduardo.meli.pergunta.Pergunta;
 import com.zupacademy.eduardo.meli.usuario.Usuario;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.util.Assert;
@@ -12,9 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -44,12 +43,14 @@ public class Produto {
     @NotNull
     @ManyToOne
     private Usuario usuario;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<ImagemProduto> imagens = new HashSet<>();
+    @OneToMany(mappedBy = "produto")
+    @OrderBy("titulo asc")
+    private SortedSet<Pergunta> perguntas = new TreeSet<>();
 
     @Deprecated
     public Produto() {}
-
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
-    private Set<ImagemProduto> imagens = new HashSet<>();
 
     public Produto(@NotBlank String nome, @NotNull @Positive BigDecimal valor,
                    @NotNull @Positive int quantidade, @Size(min = 3) Set<NovaCaracteristicaRequest> caracteristicas,
@@ -75,5 +76,9 @@ public class Produto {
                 .collect(Collectors.toSet());
 
         this.imagens.addAll(links);
+    }
+
+    public String getNomeVendedor() {
+        return this.usuario.getUsername();
     }
 }

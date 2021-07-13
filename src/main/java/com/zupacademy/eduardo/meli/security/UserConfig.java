@@ -1,5 +1,8 @@
 package com.zupacademy.eduardo.meli.security;
 
+import com.zupacademy.eduardo.meli.usuario.UserService;
+import com.zupacademy.eduardo.meli.usuario.Usuario;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -12,9 +15,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.persistence.PersistenceContext;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 //@Component
 //public class UserConfig {
@@ -22,11 +32,28 @@ import javax.annotation.Resource;
 //    @Resource(name = BeanIds.AUTHENTICATION_MANAGER)
 //    private AuthenticationManager authenticationManager;
 //
+//    @Autowired
+//    UserService userService;
+//
 //    @EventListener(ApplicationReadyEvent.class)
 //    private void init() throws Exception {
-//        Authentication senha = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("usuario1@email.com", "senha"));
+//        Usuario usuario = userService.loadUserById(1L);
 //
-//        SecurityContext sc = SecurityContextHolder.getContext();
-//        sc.setAuthentication(senha);
+//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities()));
+//    }
+//}
+
+//public  class UserConfig extends OncePerRequestFilter {
+//
+//    UserService userService;
+//
+//    public UserConfig(UserService userService) {
+//        this.userService = userService;
+//    }
+//
+//    @Override
+//    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+//        Usuario usuario = userService.loadUserById(1L);
+//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities()));
 //    }
 //}
