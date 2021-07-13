@@ -18,3 +18,18 @@ insert into caracteristica_produto(id, descricao, nome, produto_id) values
 (null, 'desc carac 4', 'nome carac 4', 2),
 (null, 'desc carac 5', 'nome carac 5', 2),
 (null, 'desc carac 6', 'nome carac 6', 2);
+
+insert into imagem_produto(id, link, produto_id) values
+(null, 'link imagem 1', 1),
+(null, 'link imagem 2', 1),
+(null, 'link imagem 3', 2);
+
+insert into opiniao(id, nota, titulo, descricao, produto_id, usuario_id) values
+(null, 3, 'titulo opiniao 1', 'desc opiniao 1', 1, 1),
+(null, 1, 'titulo opiniao 2', 'desc opiniao 1', 1, 2),
+(null, 5, 'titulo opiniao 3', 'desc opiniao 1', 1, 2);
+
+insert into pergunta(id, titulo, produto_id, interessado_id, created_at) values
+(null, 'titulo pergunta 1', 1, 1, now()),
+(null, 'titulo pergunta 2', 2, 2, now()),
+(null, 'titulo pergunta 3', 1, 1, now());

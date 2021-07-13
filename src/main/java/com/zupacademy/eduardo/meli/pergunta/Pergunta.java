@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-public class Pergunta {
+public class Pergunta implements Comparable<Pergunta> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,9 @@ public class Pergunta {
     private Usuario interessado;
     private LocalDateTime createdAt;
 
+    @Deprecated
+    public Pergunta(){}
+
     public Pergunta(@NotBlank String titulo, Produto produto, Usuario interessado) {
         this.titulo = titulo;
         this.produto = produto;
@@ -38,5 +41,14 @@ public class Pergunta {
 
     public String getEmailVendedor() {
         return this.produto.getNomeVendedor();
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    @Override
+    public int compareTo(Pergunta o) {
+        return this.titulo.compareTo(o.titulo);
     }
 }

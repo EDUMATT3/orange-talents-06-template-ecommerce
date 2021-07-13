@@ -1,6 +1,8 @@
 package com.zupacademy.eduardo.meli.produto;
 
 import com.zupacademy.eduardo.meli.categoria.Categoria;
+import com.zupacademy.eduardo.meli.detalheproduto.CaracteristicaProdutoResponse;
+import com.zupacademy.eduardo.meli.opniao.Opiniao;
 import com.zupacademy.eduardo.meli.pergunta.Pergunta;
 import com.zupacademy.eduardo.meli.usuario.Usuario;
 import org.hibernate.validator.constraints.Length;
@@ -14,6 +16,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Entity
@@ -48,6 +51,8 @@ public class Produto {
     @OneToMany(mappedBy = "produto")
     @OrderBy("titulo asc")
     private SortedSet<Pergunta> perguntas = new TreeSet<>();
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<Opiniao> opinioes = new HashSet<>();
 
     @Deprecated
     public Produto() {}
@@ -78,7 +83,35 @@ public class Produto {
         this.imagens.addAll(links);
     }
 
+    public <T> Set<T> mapeiaCaracteristicas(Function<CaracteristicaProduto, T> function){
+        return this.caracteristicas.stream().map(function).collect(Collectors.toSet());
+    }
+
+    public <T> Set<T> mapeiaImagens(Function<ImagemProduto, T> function){
+        return this.imagens.stream().map(function).collect(Collectors.toSet());
+    }
+
+    public <T extends Comparable<T>> SortedSet<T> mapeiaPeguntas(Function<Pergunta, T> function){
+        return this.perguntas.stream().map(function).collect(Collectors.toCollection(TreeSet::new));
+    }
+
     public String getNomeVendedor() {
         return this.usuario.getUsername();
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Opinioes getOpinioes() {
+        return new Opinioes(this.opinioes);
     }
 }
