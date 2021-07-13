@@ -10,10 +10,7 @@ import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
@@ -31,7 +28,7 @@ public class Produto {
     @Positive
     private BigDecimal valor;
     @NotNull
-    @Positive
+    @PositiveOrZero
     private int quantidade;
     @Size(min = 3)
     @Valid
@@ -113,5 +110,9 @@ public class Produto {
 
     public Opinioes getOpinioes() {
         return new Opinioes(this.opinioes);
+    }
+
+    public void abaterEstoque(int quantidade) {
+        this.quantidade-=quantidade;
     }
 }

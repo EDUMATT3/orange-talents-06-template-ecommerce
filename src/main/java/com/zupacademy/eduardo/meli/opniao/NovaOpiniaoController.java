@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +22,7 @@ public class NovaOpiniaoController {
 
     @PostMapping("produtos/{id}/opinioes")
     @Transactional
-    public ResponseEntity<?> novaOpniao(@PathVariable Long id, @RequestBody @Valid NovaOpiniaoRequest request, @AuthenticationPrincipal Authentication authentication){
+    public ResponseEntity<?> novaOpniao(@PathVariable Long id, @RequestBody @Valid NovaOpiniaoRequest request, @AuthenticationPrincipal Usuario usuario){
 
 
         Optional<Produto> possivelProduto = Optional.ofNullable(em.find(Produto.class, id));
@@ -29,7 +30,6 @@ public class NovaOpiniaoController {
         if(possivelProduto.isEmpty())
             return ResponseEntity.notFound().build();
 
-        Usuario usuario = em.find(Usuario.class, 1L);
         Opiniao opiniao = request.toModel(possivelProduto.get(), usuario);
 
         em.persist(opiniao);

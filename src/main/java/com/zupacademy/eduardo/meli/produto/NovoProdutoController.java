@@ -26,9 +26,7 @@ public class NovoProdutoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> cadastro(@RequestBody @Valid NovoProdutoRequest request, @AuthenticationPrincipal Usuario authentication){
-
-        Usuario usuario = em.find(Usuario.class, 1L);
+    public ResponseEntity<?> cadastro(@RequestBody @Valid NovoProdutoRequest request, @AuthenticationPrincipal Usuario authentication, @AuthenticationPrincipal Usuario usuario){
         Produto novoProduto = request.toModel(em, usuario);
         em.persist(novoProduto);
         return ResponseEntity.ok().build();
@@ -36,9 +34,7 @@ public class NovoProdutoController {
 
     @PostMapping("{id}/imagens")
     @Transactional
-    public ResponseEntity<?> addImagens(@PathVariable Long id, @Valid NovasImagensRequest request){
-        Usuario usuario = em.find(Usuario.class, 1L);
-
+    public ResponseEntity<?> addImagens(@PathVariable Long id, @Valid NovasImagensRequest request, @AuthenticationPrincipal Usuario usuario){
         Optional<Produto> possivelProduto = Optional.ofNullable(em.find(Produto.class, id));
 
         if(possivelProduto.isEmpty())
