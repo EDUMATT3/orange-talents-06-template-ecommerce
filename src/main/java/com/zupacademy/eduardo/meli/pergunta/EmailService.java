@@ -17,13 +17,27 @@ public class EmailService {
         Assert.state(Objects.nonNull(pergunta), "pergunta não deveria ser nula");
 
         mailer.send("any body", "pergunta 1",
-                pergunta.getEmailInteressado(), "perguntas@meli.com", pergunta.getEmailVendedor());
+                pergunta.getEmailInteressado(), "comunicados@meli.com", pergunta.getEmailVendedor());
     }
 
     public void enviaEmailCompra(Compra novaCompra) {
         Assert.state(Objects.nonNull(novaCompra), "compra não deveria ser nula");
 
         mailer.send("any body", "nova compra",
-                novaCompra.getEmailComprador(), "vendas@meli.com", novaCompra.getEmailVendedor());
+                novaCompra.getEmailComprador(), "comunicados@meli.com", novaCompra.getEmailVendedor());
+    }
+
+    public void enviaEmailPagamentoSucesso(Compra compra) {
+        Assert.state(Objects.nonNull(compra), "compra não deveria ser nula");
+
+        mailer.send("any body", "pagamento bem sucedido",
+                compra.getEmailComprador(), "comunicados@meli.com", compra.getEmailVendedor());
+    }
+
+    public void enviaEmailPagamentoErro(Compra compra) {
+        Assert.state(Objects.nonNull(compra), "compra não deveria ser nula");
+
+        mailer.send("any body", "pagamento não efetuado",
+                compra.getEmailComprador(), "comunicados@meli.com", compra.getEmailVendedor());
     }
 }

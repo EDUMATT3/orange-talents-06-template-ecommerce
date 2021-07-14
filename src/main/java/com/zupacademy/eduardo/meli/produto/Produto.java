@@ -115,4 +115,8 @@ public class Produto {
     public void abaterEstoque(int quantidade) {
         this.quantidade-=quantidade;
     }
+
+    public Long getIdVendedor() {
+        return this.usuario.getId();
+    }
 }
