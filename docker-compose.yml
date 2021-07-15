@@ -1,0 +1,28 @@
+version: '3'
+services:
+  meli:
+    build:
+      dockerfile: ./
+      context: .
+    image: edumatt3/meli
+    container_name: meli
+    networks:
+      - meli-prod
+    depends_on:
+      - "mysql-meli"
+    ports:
+    - "8080:8080"
+  mysql-meli:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=melidb
+      - MYSQL_USER=meliapp
+      - MYSQL_PASSWORD=meliapppass
+    networks:
+      - meli-prod
+    ports:
+    - "3306:3306"
+networks:
+  meli-prod:
+    driver: bridge
